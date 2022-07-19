@@ -1,6 +1,13 @@
 import React from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { userLoginAction } from "../../actions/LoginActions";
 function LoginScreen() {
+  const dispatch = useDispatch();
+
+  // twitter login function
+  const twitterLogin = () => {
+    dispatch(userLoginAction());
+  };
   return (
     <div>
       <h1>Twitter Login Form</h1>
@@ -24,7 +31,7 @@ function LoginScreen() {
       </div>
       <div>----------or--------</div>
       <div className="twitter__login__button">
-        <button>Login With Twitter</button>
+        <button onClick={twitterLogin}>Login With Twitter</button>
       </div>
     </div>
   );

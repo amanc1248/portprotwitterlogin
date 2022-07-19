@@ -7,7 +7,7 @@ import {
 const axios = require("axios");
 
 // login action
-export const loginAction = (email, password) => async (dispatch) => {
+export const userLoginAction = () => async (dispatch) => {
   try {
     dispatch({
       type: USER__LOGIN,
@@ -17,11 +17,7 @@ export const loginAction = (email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(
-      `/auth/twitter`,
-      { email, password },
-      config
-    );
+    const { data } = await axios.get(`/api/auth/twitter`, config);
     dispatch({
       type: USER__LOGIN__SUCCESS,
       payload: data,

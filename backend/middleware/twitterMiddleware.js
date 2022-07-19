@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
+dotenv.config();
 
 const passport = require("passport");
 const TwitterStrategy = require("passport-twitter").Strategy;
@@ -8,8 +9,8 @@ app.use(express.json());
 passport.use(
   new TwitterStrategy(
     {
-      consumerKey: "c5xhtwzj0OyvjKjC4gR9HeiOw",
-      consumerSecret: "k7gRe2bPxLLpcsqO2LW9pO1pdaEtiNYlbkjwpXXmXiZjLvAtVc",
+      consumerKey: process.env.api_key,
+      consumerSecret: process.env.api_secret,
       callbackURL: "http://localhost:3000/auth/twitter/callback",
     },
     function (token, tokenSecret, profile, cb) {

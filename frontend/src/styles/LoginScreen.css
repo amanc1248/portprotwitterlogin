@@ -1,0 +1,41 @@
+.login__screen{
+    margin: 10% auto;
+    display: flex;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.label__input{
+    text-align: left;
+    padding: 10px 0;
+}
+label{
+    font-size: 18px;
+    font-weight: 500;
+}
+input{
+    width: 100%;
+    height: 30px;
+}
+.manual__signup__button, .facebook__login__button{
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 8px
+}
+.facebook__login__button{
+    background-color:#166ADA ;
+    color: white;
+}
+.do_not_text{
+    font-size: 15px;
+    font-weight: 500;
+}
+.sign_up_text{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+}

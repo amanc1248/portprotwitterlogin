@@ -1,0 +1,7 @@
+export const USER__SIGNUP = "USER__SIGNUP";
+export const USER__SIGNUP__SUCCESS = "USER__SIGNUP__SUCCESS";
+export const USER__SIGNUP__FAILURE = "USER__SIGNUP__FAILURE";
+
+export const USER__LOGIN = "USER__LOGIN";
+export const USER__LOGIN__SUCCESS = "USER__LOGIN__SUCCESS";
+export const USER__LOGIN__FAILURE = "USER__LOGIN__FAILURE";

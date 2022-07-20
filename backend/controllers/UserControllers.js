@@ -17,13 +17,27 @@ const findUserController = async ({ username }) => {
 // create new user controller
 const createNewUserController = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  let sql = `INSERT INTO USERS VALUES (?,?)`;
-  db.query(sql, [username, password], (err, result) => {
-    if (err) throw err;
-    else {
-      if (result) {
-        return result;
-      }
+  let checkExistUser = `SELECT * FROM USERS WHERE USERNAME=${username};`;
+  let insertUser = `INSERT INTO USERS VALUES (?,?)`;
+  db.query(checkExistUser, (err, result) => {
+    console.log("our result is");
+    console.log(result);
+    if (result.length === 0) {
+      console.log("INSERT USER");
+      db.query(insertUser, [username, password], (err, result) => {
+        if (err) throw err;
+        else {
+          if (result) {
+            console.log(result);
+            res.send("success");
+          }
+        }
+      });
+    } else {
+      console.log("USER ALREADY EXIST");
+      res
+        .status(401)
+        .send({ message: "User already exist with this username" });
     }
   });
 });
@@ -38,7 +52,7 @@ const loginUserController = asyncHandler(async (req, res) => {
     if (err) throw err;
     else {
       if (result.length !== 0) {
-        console.log("we have result");
+        console.log("user Exists");
         console.log(result);
         if (result[0].password === password) {
           // req.session.adminAuthenticated = true;

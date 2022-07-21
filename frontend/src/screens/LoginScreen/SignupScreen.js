@@ -6,11 +6,12 @@ import "../../styles/LoginScreen.css";
 import { Link, useNavigate } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-function SignUpScreen() {
+function SignUpScreen({ user }) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [passwordMatch, setPasswordMatch] = useState();
+  // const [userId, setUserId] = useState(user ? user.id : "");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ function SignUpScreen() {
       navigate("/dashboard");
     }
   });
-
+  console.log(user);
   return (
     <div className="login__screen">
       <div className="login__screen__innerdiv">
@@ -61,6 +62,7 @@ function SignUpScreen() {
             onChange={(e) => {
               setUsername(e.target.value);
             }}
+            value={user ? user.id : ""}
           />
         </div>
         <div className="label__input">

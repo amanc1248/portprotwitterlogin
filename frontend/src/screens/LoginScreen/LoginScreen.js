@@ -31,6 +31,10 @@ function LoginScreen() {
       navigate("/dashboard");
     }
   });
+
+  const facebook = () => {
+    window.open("http://localhost:3001/auth/google", "_self");
+  };
   return (
     <div className="login__screen">
       <div className="login__screen__innerdiv">
@@ -81,7 +85,7 @@ function LoginScreen() {
         </p>
         <div>OR</div>
         <br />
-        <button className="facebook__login__button" onClick={() => {}}>
+        <button className="facebook__login__button" onClick={facebook}>
           Login With Facebook
         </button>
       </div>

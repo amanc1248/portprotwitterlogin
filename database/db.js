@@ -11,5 +11,4 @@ const db = mysql.createPool({
   multipleStatements: true,
 });
 
-// Connect
 module.exports = { db };

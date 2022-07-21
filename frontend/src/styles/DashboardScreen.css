@@ -1,0 +1,7 @@
+.dashbaord__screen{
+    margin: 10% auto;
+    display: flex;
+    justify-content: center;
+
+    text-align: center;
+}

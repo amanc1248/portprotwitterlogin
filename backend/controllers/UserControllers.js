@@ -67,9 +67,32 @@ const loginUserController = asyncHandler(async (req, res) => {
     }
   });
 });
+// check if user controller
+const checkIfUserExistsController = asyncHandler(async (req, res) => {
+  const { id } = req.user;
+  console.log(req.user);
+  let sql = `
+  SELECT * FROM USERS WHERE USERNAME=?;
+  `;
+  db.query(sql, [id], (err, result) => {
+    if (err) throw err;
+    else {
+      if (result.length !== 0) {
+        console.log("user Exists");
+        console.log(result);
+        res.status(200).json({
+          success: true,
+          message: "failure",
+          user: result,
+        });
+      }
+    }
+  });
+});
 
 module.exports = {
   findUserController,
   loginUserController,
   createNewUserController,
+  checkIfUserExistsController,
 };

@@ -1,3 +1,0 @@
-export const USER__LOGIN = "USER__LOGIN";
-export const USER__LOGIN__SUCCESS = "USER__LOGIN__SUCCESS";
-export const USER__LOGIN__FAILURE = "USER__LOGIN__FAILURE";

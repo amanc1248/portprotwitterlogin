@@ -1,42 +1,29 @@
+const cookieSession = require("cookie-session");
 const express = require("express");
-const session = require("express-session");
-const dotenv = require("dotenv");
-const passport = require("passport");
-const passportsetup = require("./middleware/twitterMiddleware");
-const userLoginRoutes = require("./routes/userLoginRoute");
 const cors = require("cors");
+const passportSetup = require("./middleware/googleMiddleware");
+const passport = require("passport");
+const authRoute = require("./routes/googleRoutes");
+const userRoutes = require("./routes/userRoutes");
 const app = express();
 
-const PORT = process.env.PORT || 3001;
-app.use(express.json());
-app.use(cors());
 app.use(
-  session({
-    secret: "secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
+  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
 );
-// initializing passport
+
 app.use(passport.initialize());
-// for persistent logins
 app.use(passport.session());
 
-// app.use("/api", userLoginRoutes);
-app.get("/api/auth/twitter", passport.authenticate("twitter"), (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-});
-app.get(
-  "/auth/twitter/callback",
-  passport.authenticate("twitter", { failureRedirect: "/login" }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    res.header("Access-Control-Allow-Origin", "*");
-    res.redirect("/");
-  }
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
 );
-app.get("/api", (req, res) => {
-  res.send("Api is running");
-});
 
-app.listen(PORT, console.log("server is running"));
+app.use("/auth", authRoute);
+app.use("/api/users", userRoutes);
+app.listen("3001", () => {
+  console.log("Server is running!");
+});
